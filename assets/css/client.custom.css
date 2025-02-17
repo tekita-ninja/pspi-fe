@@ -1,0 +1,10 @@
+
+
+@layer base{
+  .text-large-client{
+    @apply text-3xl md:text-6xl lg:text-7xl
+  }
+  .mx-container{
+    @apply max-w-7xl mx-auto px-4 lg:px-0
+  }
+}
