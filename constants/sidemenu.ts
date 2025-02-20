@@ -65,6 +65,18 @@ export const menusx: TMenu[] = [
         icon: 'material-symbols:newsmode-outline-rounded',
         level: 1,
       },
+      {
+        label: "Driver",
+        path: "/admin/driver",
+        icon: 'healthicons:truck-driver',
+        level: 1,
+      },
+      {
+        label: "Armada",
+        path: "/admin/armada",
+        icon: 'mdi:tanker-truck',
+        level: 1,
+      },
     ]
   },
   {
@@ -83,6 +95,13 @@ export const menusx: TMenu[] = [
         label: "Blogs",
         path: "/admin/blogs",
         icon: 'entypo:news',
+        level: 1,
+      },
+      {
+        roles: ["SUPER","ADMIN"],
+        label: "Delivery",
+        path: "/admin/delivery",
+        icon: 'material-symbols:delivery-truck-speed-rounded',
         level: 1,
       },
     ]

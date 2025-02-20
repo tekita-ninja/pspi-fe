@@ -37,7 +37,10 @@ export default defineNuxtConfig({
     "dayjs-nuxt",
     "nuxt-aos",
     "@nuxt/image",
-    "nuxt-gtag"
+    "nuxt-gtag",
+    "@vee-validate/nuxt",
+    "@morev/vue-transitions/nuxt",
+    "@samk-dev/nuxt-vcalendar"
   ],
   shadcn: {
     /**

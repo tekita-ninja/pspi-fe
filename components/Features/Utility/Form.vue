@@ -70,8 +70,6 @@ function handleChangeCompro(e:any) {
 </script>
 <template>
   <div>
-
-    <pre>{{ controller.data.fileCompro }}</pre>
     <!-- <div class="grid md:grid-cols-2 gap-2">
       <div>
         <p class="text-sm text-center text-slate-600 mb-2">Logo Small</p>
