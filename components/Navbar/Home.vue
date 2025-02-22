@@ -39,6 +39,14 @@ const links = [
     title: "PUBLIKASI",
     url: "/publication",
   },
+  {
+    title: "LACAK",
+    url: "/publication",
+  },
+  {
+    title: "LACAK PENGIRIMAN",
+    url: "/lacak",
+  },
 ];
 </script>
 
@@ -50,10 +58,10 @@ const links = [
       </nuxt-link>
       <!-- desktop -->
       <div class="hidden lg:block">
-        <div class="flex items-center justify-end space-x-10">
+        <div class="flex items-center justify-end space-x-6">
           <div v-for="item in links" :key="item">
             <nuxt-link :to="item?.url" active-class="text-orange-primary"
-              class="koulen text-lg md:text-2xl font-normal text-white hover:text-orange-light">
+              class="koulen text-lg md:text-xl font-normal text-white hover:text-orange-light">
               {{ item?.title }}
             </nuxt-link>
           </div>
