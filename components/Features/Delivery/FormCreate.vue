@@ -137,6 +137,15 @@ function handleChangeDriver(e: string) {
         </div>
       </div>
       <div class="space-y-3">
+        <UiFormField v-slot="{ componentField }" name="phone">
+          <UiFormItem>
+            <UiFormLabel>Phone</UiFormLabel>
+            <UiFormControl>
+              <UiInput type="tel" placeholder="phone..." v-bind="componentField" />
+            </UiFormControl>
+            <UiFormMessage />
+          </UiFormItem>
+        </UiFormField>
         <UiFormField v-slot="{ componentField }" name="tujuan">
           <UiFormItem>
             <UiFormLabel>DESTINATION</UiFormLabel>

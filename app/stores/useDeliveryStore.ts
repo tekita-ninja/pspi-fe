@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import { toast } from "vue-sonner";
+import { DeliveryModel, type TDeliveryForm, type TDeliveryItem, type TFormBuktiPengiriman, type TResults } from "../models/DeliveryModel";
 import Service from "../services/DeliverService";
 import type { TQueryParams } from "../types/Common";
-import { DeliveryModel, type TBuktiPengiriman, type TDeliveryForm, type TDeliveryItem, type TFormBuktiPengiriman, type TResults } from "../models/DeliveryModel";
 export const useDeliveryStore = defineStore("useDeliveryStore", {
   state: () => ({
     dialog: false,
@@ -27,6 +27,25 @@ export const useDeliveryStore = defineStore("useDeliveryStore", {
       try {
         this.loading = true
         const response = await Service.show(id)
+        this.detail = response
+      } catch (error: any) {
+        return error.response.data
+      } finally {
+        this.loading = false
+      }
+    },
+    async getByCode(code: string) {
+      try {
+        this.loading = true
+        const response = await Service.getByCode(code)
+        if (!response) {
+          toast.error('Ups', {
+            description: 'No. Pengiriman Tidak Ditemukan',
+            position:'top-center'
+          })
+          this.loading = false
+          return
+        }
         this.detail = response
       } catch (error: any) {
         return error.response.data

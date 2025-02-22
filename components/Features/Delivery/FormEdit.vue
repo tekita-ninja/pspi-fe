@@ -143,6 +143,15 @@ function handleChangeDriver(e: string) {
         </div>
       </div>
       <div class="space-y-3">
+        <UiFormField v-slot="{ componentField }" name="phone" :model-value="deliveryController.detail.phone">
+          <UiFormItem>
+            <UiFormLabel>Phone</UiFormLabel>
+            <UiFormControl>
+              <UiInput type="tel" placeholder="phone..." v-bind="componentField" />
+            </UiFormControl>
+            <UiFormMessage />
+          </UiFormItem>
+        </UiFormField>
         <UiFormField v-slot="{ componentField }" name="tujuan" :model-value="deliveryController.detail.tujuan">
           <UiFormItem>
             <UiFormLabel>DESTINATION</UiFormLabel>

@@ -4,9 +4,6 @@ import type { TDriverItem } from '@/app/models/DriverModel';
 import { useArmadaStore } from '@/app/stores/useArmadaStore';
 import { useDeliveryStore } from '@/app/stores/useDeliveryStore';
 import { useDriverStore } from '@/app/stores/useDriverStore';
-import { useUploadStore } from '@/app/stores/useUploadStore';
-import { toast } from 'vue-sonner';
-const router = useRouter()
 const route = useRoute()
 const driverController = useDriverStore()
 const armadaController = useArmadaStore()
@@ -14,51 +11,12 @@ const deliveryController = useDeliveryStore()
 const controller = useDeliveryStore()
 
 const deliveryId = route.params.id
-const images = ref()
-const uploadController = useUploadStore()
 await deliveryController.getById(+deliveryId)
 await armadaController.getAll()
 await driverController.getAll()
 
-async function setDelivedOrder() {
-  if (images.value && images.value.length > 0) {
-    const promises = []
-    for (let i = 0; i < images.value.length; i++) {
-      const item = images.value[i];
-      promises.push(uploadController.uploadFile(item.file))
-    }
-    const response = await Promise.all(promises);
-    const imagesData = response.map(i => i.data);
-
-    const dataForSend = {
-      id: +deliveryId,
-      images: imagesData
-    }
-    await controller.setDelivered(dataForSend)
-    router.push('/admin/delivery')
-  } else {
-    toast.error('Validation Error', {
-      description: 'Please upload image evidence',
-      position: 'top-center'
-    })
-  }
-}
 const armadaSelected = ref<TArmadaItem>(armadaController.lists.find(i => i.id === deliveryController.detail.armadaId)!)
 const driverSelected = ref<TDriverItem>(driverController.lists.find(i => i.id == deliveryController.detail.driverId)!)
-
-
-function handleChangeImage(e: any) {
-  const files = e.target.files
-  const oks = []
-  for (let i = 0; i < files.length; i++) {
-    const element = files[i];
-    oks.push({
-      file: element,
-      preview: URL.createObjectURL(element)
-    })
-  }
-  images.value = oks;
-}
 </script>
 <template>
   <div>
@@ -128,6 +86,15 @@ function handleChangeImage(e: any) {
         </div>
       </div>
       <div class="space-y-3">
+        <UiFormField v-slot="{ componentField }" name="phone" :model-value="deliveryController.detail.phone">
+          <UiFormItem>
+            <UiFormLabel>Phone</UiFormLabel>
+            <UiFormControl>
+              <UiInput type="tel" placeholder="phone..." v-bind="componentField" />
+            </UiFormControl>
+            <UiFormMessage />
+          </UiFormItem>
+        </UiFormField>
         <UiFormField v-slot="{ componentField }" name="tujuan" :model-value="deliveryController.detail.tujuan">
           <UiFormItem>
             <UiFormLabel>DESTINATION</UiFormLabel>
@@ -137,6 +104,13 @@ function handleChangeImage(e: any) {
             <UiFormMessage />
           </UiFormItem>
         </UiFormField>
+      </div>
+    </div>
+    <div class="my-3 border rounded-xl p-5">
+      <h2 class="text-xl font-semibold mb-2">Progres Pengiriman</h2>
+      <div class="flex py-3 border-b" v-for="item,index in controller.detail.progress_pengiriman" :key="item.id">
+        <div class="w-5">-</div>
+        <div class="text-sm font-bold">{{ item.description }} -  {{ $dayjs(item.createdAt).format('DD MMMM YYYY HH:mm:ss') }}</div>
       </div>
     </div>
   </div>

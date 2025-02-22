@@ -63,20 +63,20 @@ function handleChangeImage(e:any) {
 <template>
   <div>
     <div>
-        <div class="my-4">
-          <div class="text-sm mb-2">Upload Photo Evidence</div>
-          <input multiple accept="image/*" type="file" @change="handleChangeImage">
+      <div class="my-4">
+        <div class="text-sm mb-2">Upload Photo Evidence</div>
+        <input multiple accept="image/*" type="file" @change="handleChangeImage">
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+        <div v-for="item in images" class="border p-2 aspect-video w-full">
+          <img class="w-full h-full object-contain" :src="item.preview" alt="">
         </div>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
-          <div v-for="item in images" class="border p-2 aspect-video w-full">
-            <img class="w-full h-full object-contain" :src="item.preview" alt="">
-          </div>
-        </div>
-        <div class="flex justify-start mt-3">
-          <UiButton @click="setDelivedOrder" :disabled="controller.isSubmitting">
-            Submit
-          </UiButton>
-        </div>
+      </div>
+      <div class="flex justify-start mt-3">
+        <UiButton @click="setDelivedOrder" :disabled="controller.isSubmitting">
+          Submit
+        </UiButton>
+      </div>
     </div>
     <div class="space-y-3">
       <div class="grid md:grid-cols-2 gap-3">
@@ -134,6 +134,15 @@ function handleChangeImage(e:any) {
         </div>
       </div>
       <div class="space-y-3">
+        <UiFormField v-slot="{ componentField }" name="phone" :model-value="deliveryController.detail.phone">
+          <UiFormItem>
+            <UiFormLabel>Phone</UiFormLabel>
+            <UiFormControl>
+              <UiInput type="tel" disabled placeholder="phone..." v-bind="componentField" />
+            </UiFormControl>
+            <UiFormMessage />
+          </UiFormItem>
+        </UiFormField>
         <UiFormField v-slot="{ componentField }" name="tujuan" :model-value="deliveryController.detail.tujuan">
           <UiFormItem>
             <UiFormLabel>DESTINATION</UiFormLabel>

@@ -40,10 +40,6 @@ const links = [
     url: "/publication",
   },
   {
-    title: "LACAK",
-    url: "/publication",
-  },
-  {
     title: "LACAK PENGIRIMAN",
     url: "/lacak",
   },

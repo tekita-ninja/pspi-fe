@@ -7,6 +7,7 @@ export const fromDeliverySchema = toTypedSchema(z.object({
   driverId: z.coerce.number({ message }),
   armadaId: z.coerce.number({ message }),
   startDate: z.string({ message }).optional(),
+  phone: z.string({ message }),
   tujuan: z.string({ message }),
 }))
 

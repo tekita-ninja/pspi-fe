@@ -7,6 +7,7 @@ export type TDeliveryForm = {
   driverId: number
   armadaId: number
   startDate?: Date
+  phone: string
   tujuan: string
 }
 export type TBuktiPengiriman = {
@@ -17,6 +18,13 @@ export type TFormBuktiPengiriman = {
   id: number
   images: string[]
 }
+
+export type TProgresPemgirimanItem  = {
+  id: number
+  statusPengiriman: number
+  description: string
+  createdAt: string
+}
 export type TDeliveryItem = {
   id: number
   code: string
@@ -25,11 +33,13 @@ export type TDeliveryItem = {
   armadaId: number
   startDate: string
   endDate: string | null,
+  phone: string
   tujuan: string
   createdAt: string
   updatedAt: string
   driver: TDriverForm
   bukti_pengiriman: TBuktiPengiriman[],
+  progress_pengiriman: TProgresPemgirimanItem[] | [],
   armada: TArmadaForm
 }
 
