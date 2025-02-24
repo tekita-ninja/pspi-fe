@@ -41,7 +41,7 @@ export const useDeliveryStore = defineStore("useDeliveryStore", {
         if (!response) {
           toast.error('Ups', {
             description: 'No. Pengiriman Tidak Ditemukan',
-            position:'top-center'
+            position: 'top-center'
           })
           this.loading = false
           return
@@ -54,15 +54,19 @@ export const useDeliveryStore = defineStore("useDeliveryStore", {
       }
     },
     async create(data: TDeliveryForm) {
+      const dayjs = useDayjs()
       const common = useCommonStore()
+      const wa = `62` + toWaNumber(data.phone)
       try {
         this.isSubmitting = true
         const response = await Service.create(data)
+        const textWA = `No. Pengiriman: ${response.data?.data?.code} - Pesanan Anda Sudah Dibuat pada ${dayjs(data.startDate).format('DD MMMM YYYY HH:mm')} dan siap dikirimkan`
         if (response.status === 201) {
           await this.get(toQueryParams(common.$state.params))
           toast.success('Success!', {
             description: 'success create data!'
           })
+          window.open(`https://wa.me/${wa}?text=${textWA}`,'_blank')
         }
       } catch (error: any) {
         this.dialog = true
@@ -107,7 +111,7 @@ export const useDeliveryStore = defineStore("useDeliveryStore", {
         this.isSubmitting = false
       }
     },
-    async changeStatus(data: {id:number,statusPengiriman: number}) {
+    async changeStatus(data: { id: number, statusPengiriman: number }) {
       const common = useCommonStore()
       try {
         this.isSubmitting = true
