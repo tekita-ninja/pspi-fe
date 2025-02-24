@@ -74,7 +74,12 @@ async function handleClickLacak(e: any) {
                   <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF]">
                     <div class="w-44 shrink-0 font-bold">Nama</div>
                     <div class="w-2 hidden md:block">:</div>
-                    <div class="flex-1">{{ controller.detail.driver.name }}</div>
+                    <div class="flex-1">{{ controller.detail.driver?.name || '-' }}</div>
+                  </div>
+                  <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF]">
+                    <div class="w-44 shrink-0 font-bold">No. Telepon</div>
+                    <div class="w-2 hidden md:block">:</div>
+                    <div class="flex-1">{{ controller.detail.driver?.phone || '-' }}</div>
                   </div>
                   <div class="flex flex-col md:flex-row px-3 py-2">
                     <div class="w-44 shrink-0 font-bold">Profil Armada</div>
@@ -91,12 +96,12 @@ async function handleClickLacak(e: any) {
                             :src="toAssetLink(controller.detail.armada.image_back)" alt="">
                         </div>
                         <div class="aspect-video border">
-                          <img v-if="controller.detail.armada.image_front" class="h-full w-full object-contain"
-                            :src="toAssetLink(controller.detail.armada.image_front)" alt="">
+                          <img v-if="controller.detail.armada.image_left" class="h-full w-full object-contain"
+                            :src="toAssetLink(controller.detail.armada.image_left)" alt="">
                         </div>
                         <div class="aspect-video border">
-                          <img v-if="controller.detail.armada.image_front" class="h-full w-full object-contain"
-                            :src="toAssetLink(controller.detail.armada.image_front)" alt="">
+                          <img v-if="controller.detail.armada.image_right" class="h-full w-full object-contain"
+                            :src="toAssetLink(controller.detail.armada.image_right)" alt="">
                         </div>
                       </div>
                     </div>

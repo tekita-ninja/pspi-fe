@@ -33,7 +33,7 @@ watch(options, async (value) => {
         <div>
           <div class="flex">
             <div class="w-20 shrink-0">Driver</div>
-            <div class="flex-1">: {{ item.driver.name }}</div>
+            <div class="flex-1">: {{ item.driver?.name }}</div>
           </div>
           <div class="flex">
             <div class="w-20 shrink-0">Arrive</div>

@@ -4,6 +4,6 @@ export const columns: Header[] = [
   { text: "FRONT IMAGE", value: "image",fixed:true,width:60 },
   { text: "No. POL", value: "nopol" },
   { text: "MERK", value: "merk" },
-  { text: "KOMPARTEMENT", value: "kompartment" },
+  { text: "QUANTITY", value: "quantity" },
   { text: "ACTIONS", value: "actions" },
 ];

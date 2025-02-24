@@ -24,7 +24,7 @@ class ArmadaService {
       url: `armada/${id}`,
       method: "GET",
     });
-    return response.data.data.data;
+    return response.data.data;
   }
   async create(data: TArmadaForm) {
     const response = await this.api({

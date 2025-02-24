@@ -25,20 +25,20 @@ const controller = useArmadaStore()
 await controllerDriver.getAll()
 await controller.getById(+route.params.id)
 imageFront.value = {
-  preview: controller.detail.image_front && toAssetLink(controller.detail.image_front)
+  preview: controller.detail?.image_front && toAssetLink(controller.detail.image_front)
 }
 imageLeft.value = {
-  preview: controller.detail.image_left && toAssetLink(controller.detail.image_left)
+  preview: controller.detail?.image_left && toAssetLink(controller.detail?.image_left)
 }
 imageBack.value = {
-  preview: controller.detail.image_back && toAssetLink(controller.detail.image_back)
+  preview: controller.detail?.image_back && toAssetLink(controller.detail?.image_back)
 }
 imageRight.value = {
-  preview: controller.detail.image_right && toAssetLink(controller.detail.image_right)
+  preview: controller.detail?.image_right && toAssetLink(controller.detail?.image_right)
 }
-imageFront.value = {
-  preview: controller.detail.image_front && toAssetLink(controller.detail.image_front)
-}
+// imageFront.value = {
+//   preview: controller.detail?.image_front && toAssetLink(controller.detail?.image_front)
+// }
 function handleChangeImageFront(e: any) {
   imageFront.value = {
     file: e.target.files[0],
@@ -119,6 +119,7 @@ const onSubmit = form.handleSubmit(async (values) => {
 })
 </script>
 <template>
+  <!-- <pre>{{ controller }}</pre> -->
   <ContainersPage title="Armada" subtitle="Form Armada">
     <template #actions>
     </template>
@@ -211,14 +212,14 @@ const onSubmit = form.handleSubmit(async (values) => {
           <label for="terraDoc">Document</label>
           <input @change="handleChangeDoc" type="file" name="terraDoc" id="terraDoc">
         </div>
-        <a class="text-sm font-bold text-blue-500" :href="toAssetLink(controller.detail.terra_doc)" target="_blank"
-          rel="noopener noreferrer">View Doc</a>
+        <a v-if="controller.detail?.terra_doc" class="text-sm font-bold text-blue-500"
+          :href="toAssetLink(controller.detail.terra_doc)" target="_blank" rel="noopener noreferrer">View Doc</a>
       </div>
       <div class="mt-6 border p-3 rounded">
         <form @submit="onSubmit">
           <div class="space-y-3">
             <div class="grid md:grid-cols-2 gap-3">
-              <UiFormField v-slot="{ componentField }" name="nopol" v-bind:model-value="controller.detail.nopol">
+              <UiFormField v-slot="{ componentField }" name="nopol" v-bind:model-value="controller.detail?.nopol">
                 <UiFormItem>
                   <UiFormLabel>NOPOL</UiFormLabel>
                   <UiFormControl>
@@ -227,13 +228,13 @@ const onSubmit = form.handleSubmit(async (values) => {
                   <UiFormMessage />
                 </UiFormItem>
               </UiFormField>
-              
+
               <UiFormField v-slot="{ componentField }" name="defaultDriverId"
-                :model-value="`${controller.detail.defaultDriverId}`">
+                :model-value="`${controller.detail?.defaultDriverId}`">
                 <UiFormItem>
                   <UiFormLabel>Main Driver</UiFormLabel>
                   <UiFormControl>
-                    <UiSelect v-bind="componentField" :default-value="`${controller.detail.defaultDriverId}`">
+                    <UiSelect v-bind="componentField" :default-value="`${controller.detail?.defaultDriverId}`">
                       <UiSelectTrigger>
                         <UiSelectValue placeholder="Select Driver" />
                       </UiSelectTrigger>
@@ -255,7 +256,7 @@ const onSubmit = form.handleSubmit(async (values) => {
                 </UiFormItem>
               </UiFormField>
             </div>
-            <UiFormField v-slot="{ componentField }" name="merk" v-model:model-value="controller.detail.merk">
+            <UiFormField v-slot="{ componentField }" name="merk" :model-value="controller.detail?.merk">
               <UiFormItem>
                 <UiFormLabel>MERK</UiFormLabel>
                 <UiFormControl>
@@ -265,7 +266,7 @@ const onSubmit = form.handleSubmit(async (values) => {
               </UiFormItem>
             </UiFormField>
             <div class="grid grid-cols-2 gap-3">
-              <UiFormField v-slot="{ componentField }" name="quantity" v-model:model-value="controller.detail.quantity">
+              <UiFormField v-slot="{ componentField }" name="quantity" :model-value="controller.detail?.quantity">
                 <UiFormItem>
                   <UiFormLabel>QUANTITY</UiFormLabel>
                   <UiFormControl>
@@ -274,12 +275,11 @@ const onSubmit = form.handleSubmit(async (values) => {
                   <UiFormMessage />
                 </UiFormItem>
               </UiFormField>
-              <UiFormField v-slot="{ componentField }" name="kompartment"
-                v-model:model-value="controller.detail.kompartment">
+              <UiFormField v-slot="{ componentField }" name="kompartment" :model-value="controller.detail?.kompartment">
                 <UiFormItem>
-                  <UiFormLabel>KOMPARTEMENT</UiFormLabel>
+                  <!-- <UiFormLabel>KOMPARTEMENT</UiFormLabel> -->
                   <UiFormControl>
-                    <UiInput type="text" placeholder="4 | 4 | 8 ..." v-bind="componentField" />
+                    <UiInput class="hidden" type="text" placeholder="4 | 4 | 8 ..." v-bind="componentField" />
                   </UiFormControl>
                   <UiFormMessage />
                 </UiFormItem>

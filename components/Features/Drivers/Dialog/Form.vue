@@ -71,7 +71,7 @@ async function handleChangeImage(e: any) {
               <UiFormMessage />
             </UiFormItem>
           </UiFormField>
-          <UiFormField v-slot="{ componentField }" name="email" :model-value="item?.email">
+          <!-- <UiFormField v-slot="{ componentField }" name="email" :model-value="item?.email">
             <UiFormItem>
               <UiFormLabel>Email</UiFormLabel>
               <UiFormControl>
@@ -79,7 +79,7 @@ async function handleChangeImage(e: any) {
               </UiFormControl>
               <UiFormMessage />
             </UiFormItem>
-          </UiFormField>
+          </UiFormField> -->
         </div>
         <UiDialogFooter class="mt-4 flex justify-end">
           <UiButton type="submit">

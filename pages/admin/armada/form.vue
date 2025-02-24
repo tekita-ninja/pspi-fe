@@ -67,7 +67,10 @@ function handleDeleteImage(type: string) {
 }
 
 const form = useForm({
-  validationSchema: fromArmadaSchema
+  validationSchema: fromArmadaSchema,
+  initialValues: {
+    kompartment: '-'
+  }
 })
 
 const onSubmit = form.handleSubmit(async (values) => {
@@ -253,7 +256,7 @@ const onSubmit = form.handleSubmit(async (values) => {
                   <UiFormMessage />
                 </UiFormItem>
               </UiFormField>
-              <UiFormField v-slot="{ componentField }" name="kompartment">
+              <!-- <UiFormField v-slot="{ componentField }" name="kompartment">
                 <UiFormItem>
                   <UiFormLabel>KOMPARTEMENT</UiFormLabel>
                   <UiFormControl>
@@ -261,7 +264,7 @@ const onSubmit = form.handleSubmit(async (values) => {
                   </UiFormControl>
                   <UiFormMessage />
                 </UiFormItem>
-              </UiFormField>
+              </UiFormField> -->
             </div>
           </div>
           <UiDialogFooter class="mt-4 flex justify-end">
