@@ -9,4 +9,5 @@ export const fromDriverSchema = toTypedSchema(z.object({
   image: z.string({ message }).optional(),
   phone: z.string({ message }),
   email: z.string({ message }).optional(),
+  type: z.coerce.number({ message }),
 }))

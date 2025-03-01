@@ -19,7 +19,7 @@ export type TFormBuktiPengiriman = {
   images: string[]
 }
 
-export type TProgresPemgirimanItem  = {
+export type TProgresPemgirimanItem = {
   id: number
   statusPengiriman: number
   description: string
@@ -30,6 +30,7 @@ export type TDeliveryItem = {
   code: string
   statusPengiriman: number
   driverId: number
+  codriverId?: number
   armadaId: number
   startDate: string
   endDate: string | null,

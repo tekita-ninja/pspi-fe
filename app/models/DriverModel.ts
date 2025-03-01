@@ -5,11 +5,13 @@ export type TDriverForm = {
   name: string
   phone: string
   email?: string
+  type: number
 }
 
 export type TDriverItem = {
   id: number
   name: string
+  type?: number
   image: string
   phone: string
   email: string

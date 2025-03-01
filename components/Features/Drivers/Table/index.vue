@@ -33,6 +33,10 @@ watch(options, async (value) => {
       <template #item-image="item">
         <ImageView :src="item.image" />
       </template>
+      <template #item-type="{type}">
+        <div v-if="type===1">Driver</div>
+        <div v-if="type===2">Co Driver</div>
+      </template>
       <template #item-actions="item">
         <div class="flex gap-1">
           <FeaturesDriversDialogDelete :item="item" />

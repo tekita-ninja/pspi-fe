@@ -71,15 +71,25 @@ async function handleChangeImage(e: any) {
               <UiFormMessage />
             </UiFormItem>
           </UiFormField>
-          <!-- <UiFormField v-slot="{ componentField }" name="email" :model-value="item?.email">
+          <UiFormField v-slot="{ componentField }" name="type" :model-value="`${item?.type}`">
             <UiFormItem>
-              <UiFormLabel>Email</UiFormLabel>
+              <UiFormLabel>Type</UiFormLabel>
               <UiFormControl>
-                <UiInput type="text" placeholder="email..." v-bind="componentField" />
+                <UiSelect v-bind="componentField">
+                  <UiSelectTrigger>
+                    <UiSelectValue placeholder="Select Type" />
+                  </UiSelectTrigger>
+                  <UiSelectContent>
+                    <UiSelectGroup>
+                      <UiSelectItem value="1">Driver</UiSelectItem>
+                      <UiSelectItem value="2">Co Driver</UiSelectItem>
+                    </UiSelectGroup>
+                  </UiSelectContent>
+                </UiSelect>
               </UiFormControl>
               <UiFormMessage />
             </UiFormItem>
-          </UiFormField> -->
+          </UiFormField>
         </div>
         <UiDialogFooter class="mt-4 flex justify-end">
           <UiButton type="submit">

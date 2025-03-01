@@ -31,8 +31,9 @@ const onSubmit = form.handleSubmit(async (values) => {
   await controller.update(newData, +deliveryId)
   router.push('/admin/delivery')
 })
-const armadaSelected = ref<TArmadaItem>(armadaController.lists.find(i=> i.id === deliveryController.detail.armadaId)!)
+const armadaSelected = ref<TArmadaItem>(armadaController.lists.find(i => i.id === deliveryController.detail.armadaId)!)
 const driverSelected = ref<TDriverItem>(driverController.lists.find(i => i.id == deliveryController.detail.driverId)!)
+const codriverSelected = ref<TDriverItem>(driverController.lists.find(i => i.id == deliveryController.detail.codriverId)!)
 function handleChangeArmada(e: string) {
   armadaSelected.value = armadaController.lists.find(i => i.id === +e)!
   driverSelected.value = driverController.lists.find(i => i.id == armadaSelected.value?.defaultDriverId)!
@@ -40,11 +41,14 @@ function handleChangeArmada(e: string) {
 function handleChangeDriver(e: string) {
   driverSelected.value = driverController.lists.find(i => i.id === +e)!
 }
+function handleChangeCoDriver(e: string) {
+  codriverSelected.value = driverController.lists.find(i => i.id === +e)!
+}
 </script>
 <template>
   <form @submit="onSubmit">
     <div class="space-y-3">
-      <div class="grid md:grid-cols-2 gap-3">
+      <div class="grid md:grid-cols-3 gap-3">
         <div>
           <UiFormField v-slot="{ componentField }" name="armadaId"
             :model-value="`${deliveryController.detail.armadaId}`">
@@ -100,8 +104,8 @@ function handleChangeDriver(e: string) {
             <UiFormItem>
               <UiFormLabel>Select Driver</UiFormLabel>
               <UiFormControl>
-                <UiSelect v-bind="componentField" :model-value="`${deliveryController.detail.driverId}`"
-                  @update:model-value="handleChangeDriver" :default-value="`${driverSelected?.id}`">
+                <UiSelect v-bind="componentField" @update:model-value="handleChangeDriver"
+                  :default-value="`${driverSelected?.id}`">
                   <UiSelectTrigger>
                     <UiSelectValue placeholder="Select Driver" />
                   </UiSelectTrigger>
@@ -133,9 +137,47 @@ function handleChangeDriver(e: string) {
                   <div class="w-32 shrink-0 text-sm">PHONE</div>
                   <div class="flex-1 text-sm font-bold"> : {{ driverSelected.phone }}</div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <UiFormField v-slot="{ componentField }" name="codriverId" :model-value="`${codriverSelected?.id}`">
+            <UiFormItem>
+              <UiFormLabel>Select Co Driver</UiFormLabel>
+              <UiFormControl>
+                <UiSelect v-bind="componentField" @update:model-value="handleChangeCoDriver"
+                  :default-value="`${codriverSelected?.id}`">
+                  <UiSelectTrigger>
+                    <UiSelectValue placeholder="Select Driver" />
+                  </UiSelectTrigger>
+                  <UiSelectContent>
+                    <UiSelectGroup>
+                      <UiSelectLabel>select driver</UiSelectLabel>
+                      <UiSelectItem v-for="item in driverController.lists" :key="item.id" :value="`${item.id}`">
+                        {{ item.name }}
+                      </UiSelectItem>
+                    </UiSelectGroup>
+                  </UiSelectContent>
+                </UiSelect>
+              </UiFormControl>
+              <UiFormMessage />
+            </UiFormItem>
+          </UiFormField>
+          <div v-if="codriverSelected" class=" my-3 border rounded-md p-3">
+            <div class="gap-3 items-center">
+              <div class="aspect-[3/4] w-32 mx-auto mb-4">
+                <img class="rounded-md w-full h-full border object-contain" :src="toAssetLink(codriverSelected?.image)"
+                  alt="">
+              </div>
+              <div class="flex-1">
                 <div class="flex">
-                  <div class="w-32 shrink-0 text-sm">EMAIL</div>
-                  <div class="flex-1 text-sm font-bold"> : {{ driverSelected.email || "-" }}</div>
+                  <div class="w-32 shrink-0 text-sm">NAME</div>
+                  <div class="flex-1 text-sm font-bold"> : {{ codriverSelected.name }}</div>
+                </div>
+                <div class="flex">
+                  <div class="w-32 shrink-0 text-sm">PHONE</div>
+                  <div class="flex-1 text-sm font-bold"> : {{ codriverSelected.phone }}</div>
                 </div>
               </div>
             </div>

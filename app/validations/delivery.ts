@@ -5,6 +5,7 @@ const message = `please complete the field`;
 export const fromDeliverySchema = toTypedSchema(z.object({
   statusPengiriman: z.coerce.number({ message }).optional(),
   driverId: z.coerce.number({ message }),
+  codriverId: z.coerce.number({ message }).optional(),
   armadaId: z.coerce.number({ message }),
   startDate: z.string({ message }).optional(),
   phone: z.string({ message }),

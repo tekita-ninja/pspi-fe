@@ -45,6 +45,7 @@ async function setDelivedOrder() {
 }
 const armadaSelected = ref<TArmadaItem>(armadaController.lists.find(i => i.id === deliveryController.detail.armadaId)!)
 const driverSelected = ref<TDriverItem>(driverController.lists.find(i => i.id == deliveryController.detail.driverId)!)
+const codriverSelected = ref<TDriverItem>(driverController.lists.find(i => i.id == deliveryController.detail?.codriverId)!)
 
 
 function handleChangeImage(e:any) {
@@ -82,9 +83,10 @@ function handleChangeImage(e:any) {
       </div>
     </div>
     <div class="space-y-3">
-      <div class="grid md:grid-cols-2 gap-3">
+      <div class="grid md:grid-cols-3 gap-3">
         <div>
           <div v-if="armadaSelected" class="my-3 p-3 border rounded-lg">
+            <div class="mb-2">Armada</div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
               <img class="rounded-md border" :src="toAssetLink(armadaSelected?.image_front)" alt="">
               <img class="rounded-md border" :src="toAssetLink(armadaSelected?.image_back)" alt="">
@@ -103,16 +105,13 @@ function handleChangeImage(e:any) {
               <div class="w-32 shrink-0 text-sm">QUANTITY</div>
               <div class="flex-1 text-sm font-bold"> : {{ armadaSelected.quantity }}</div>
             </div>
-            <div class="flex">
-              <div class="w-32 shrink-0 text-sm">KOMPARTEMENT</div>
-              <div class="flex-1 text-sm font-bold"> : {{ armadaSelected.kompartment }}</div>
-            </div>
             <a class="text-sm font-bold text-blue-500" :href="toAssetLink(armadaSelected.terra_doc)" target="_blank"
               rel="noopener noreferrer">View Document</a>
           </div>
         </div>
         <div>
           <div v-if="driverSelected" class=" my-3 border rounded-md p-3">
+            <div class="mb-2">Driver</div>
             <div class="gap-3 items-center">
               <div class="aspect-[3/4] w-32 mx-auto mb-4">
                 <img class="rounded-md w-full h-full border object-contain" :src="toAssetLink(driverSelected?.image)"
@@ -127,9 +126,26 @@ function handleChangeImage(e:any) {
                   <div class="w-32 shrink-0 text-sm">PHONE</div>
                   <div class="flex-1 text-sm font-bold"> : {{ driverSelected.phone }}</div>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div v-if="codriverSelected" class=" my-3 border rounded-md p-3">
+            <div class="mb-2">Co Driver</div>
+            <div class="gap-3 items-center">
+              <div class="aspect-[3/4] w-32 mx-auto mb-4">
+                <img class="rounded-md w-full h-full border object-contain" :src="toAssetLink(codriverSelected?.image)"
+                  alt="">
+              </div>
+              <div class="flex-1">
                 <div class="flex">
-                  <div class="w-32 shrink-0 text-sm">EMAIL</div>
-                  <div class="flex-1 text-sm font-bold"> : {{ driverSelected.email || "-" }}</div>
+                  <div class="w-32 shrink-0 text-sm">NAME</div>
+                  <div class="flex-1 text-sm font-bold"> : {{ codriverSelected.name }}</div>
+                </div>
+                <div class="flex">
+                  <div class="w-32 shrink-0 text-sm">PHONE</div>
+                  <div class="flex-1 text-sm font-bold"> : {{ codriverSelected.phone }}</div>
                 </div>
               </div>
             </div>
