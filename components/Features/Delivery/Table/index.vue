@@ -11,11 +11,11 @@ const options = ref<ServerOptions>(common.$state.params);
 function initialData() {
   common.changeParams({
     ...common.$state.params,
-    status: undefined
+    status: undefined,
   });
   controller.get(toQueryParams({
     ...common.$state.params,
-    status: undefined
+    status: undefined,
   }))
 }
 watch(options, async (value) => {
@@ -26,9 +26,19 @@ watch(options, async (value) => {
 </script>
 <template>
   <div>
+    <div class="py-2 flex justify-end gap-2">
+      <FeaturesDeliveryFormSearch />
+      <FeaturesDeliveryDialogFilter />
+    </div>
     <EasyDataTable v-bind="{ ...TableProps }" v-model:server-options="options"
       v-model:server-items-length="controller.results.meta.total" v-if="controller.results.data" :headers="columns"
       :loading="controller.loading" :items="controller.results.data">
+      <template #item-code="item">
+        <div>
+          <div>{{ item?.code }}</div>
+          <div v-if="$dayjs().diff($dayjs(item.startDate), 'day') > 7" class="text-[10px] font-bold text-destructive">Expired Code</div>
+        </div>
+      </template>
       <template #item-armada="item">
         <div>
           <div class="flex">
@@ -67,7 +77,7 @@ watch(options, async (value) => {
       </template>
       <template #item-actions="item">
         <div class="flex gap-1">
-          <UiButton variant="outline" v-if="item.statusPengiriman === 3" :item="item" size="icon-sm"
+          <UiButton variant="outline" :item="item" size="icon-sm"
             @click="router.push(`/admin/delivery/detail/${item.id}`)" class="flex gap-1">
             <Icon class="w-4 h-4" name="fontisto:info" />
           </UiButton>

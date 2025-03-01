@@ -7,6 +7,7 @@ import { useArmadaStore } from '@/app/stores/useArmadaStore';
 import { useDriverStore } from '@/app/stores/useDriverStore';
 import { useUploadStore } from '@/app/stores/useUploadStore';
 import { fromArmadaSchema } from '@/app/validations/armada';
+import { optionQuantityArmada } from '@/constants/options';
 import { useForm } from 'vee-validate';
 
 const router = useRouter()
@@ -21,9 +22,9 @@ const imageLeft = ref<{ file?: File, preview: string }>()
 const controllerDriver = useDriverStore()
 const controllerUpload = useUploadStore()
 const controller = useArmadaStore()
-
 await controllerDriver.getAll()
 await controller.getById(+route.params.id)
+const showInputQty = ref(true)
 imageFront.value = {
   preview: controller.detail?.image_front && toAssetLink(controller.detail.image_front)
 }
@@ -36,9 +37,6 @@ imageBack.value = {
 imageRight.value = {
   preview: controller.detail?.image_right && toAssetLink(controller.detail?.image_right)
 }
-// imageFront.value = {
-//   preview: controller.detail?.image_front && toAssetLink(controller.detail?.image_front)
-// }
 function handleChangeImageFront(e: any) {
   imageFront.value = {
     file: e.target.files[0],
@@ -117,9 +115,18 @@ const onSubmit = form.handleSubmit(async (values) => {
   router.push('/admin/armada')
 
 })
+
+function handleChangeQuantity(q: string) {
+  if (q === "other") {
+    form.setFieldValue("quantity", undefined)
+    showInputQty.value = true
+  } else {
+    showInputQty.value = false
+    form.setFieldValue("quantity", q)
+  }
+}
 </script>
 <template>
-  <!-- <pre>{{ controller }}</pre> -->
   <ContainersPage title="Armada" subtitle="Form Armada">
     <template #actions>
     </template>
@@ -266,18 +273,39 @@ const onSubmit = form.handleSubmit(async (values) => {
               </UiFormItem>
             </UiFormField>
             <div class="grid grid-cols-2 gap-3">
+              <UiFormField v-slot="{ componentField }" name="quantityOpt" :model-value="controller.detail?.quantity"
+                @update:model-value="handleChangeQuantity">
+                <UiFormItem>
+                  <UiFormLabel>SELECT QUANTITY</UiFormLabel>
+                  <UiFormControl>
+                    <UiSelect v-bind="componentField">
+                      <UiSelectTrigger>
+                        <UiSelectValue placeholder="Select Quantity" />
+                      </UiSelectTrigger>
+                      <UiSelectContent>
+                        <UiSelectGroup>
+                          <UiSelectLabel>quantity</UiSelectLabel>
+                          <UiSelectItem v-for="item in optionQuantityArmada" :key="item.label" :value="`${item.label}`">
+                            {{ item.label }}
+                          </UiSelectItem>
+                        </UiSelectGroup>
+                      </UiSelectContent>
+                    </UiSelect>
+                  </UiFormControl>
+                  <UiFormMessage />
+                </UiFormItem>
+              </UiFormField>
               <UiFormField v-slot="{ componentField }" name="quantity" :model-value="controller.detail?.quantity">
                 <UiFormItem>
-                  <UiFormLabel>QUANTITY</UiFormLabel>
+                  <UiFormLabel>INPUT QUANTITY</UiFormLabel>
                   <UiFormControl>
-                    <UiInput type="text" placeholder="16K..." v-bind="componentField" />
+                    <UiInput type="text" placeholder="Contoh: 16 L" v-bind="componentField" />
                   </UiFormControl>
                   <UiFormMessage />
                 </UiFormItem>
               </UiFormField>
               <UiFormField v-slot="{ componentField }" name="kompartment" :model-value="controller.detail?.kompartment">
                 <UiFormItem>
-                  <!-- <UiFormLabel>KOMPARTEMENT</UiFormLabel> -->
                   <UiFormControl>
                     <UiInput class="hidden" type="text" placeholder="4 | 4 | 8 ..." v-bind="componentField" />
                   </UiFormControl>
@@ -287,6 +315,9 @@ const onSubmit = form.handleSubmit(async (values) => {
             </div>
           </div>
           <UiDialogFooter class="mt-4 flex justify-end">
+            <UiButton @click="router.push('/admin/armada')" variant="outline" type="button">
+              Cancel
+            </UiButton>
             <UiButton :disabled="controller.isSubmitting" type="submit">
               Save
             </UiButton>

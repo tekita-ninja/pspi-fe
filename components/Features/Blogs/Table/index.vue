@@ -12,11 +12,13 @@ const options = ref<ServerOptions>(common.$state.params);
 function initialData() {
   common.changeParams({
     ...common.$state.params,
-    status: undefined
+    status: undefined,
+    
   });
   controller.get(toQueryParams({
     ...common.$state.params,
-    status: undefined
+    status: undefined,
+    
   }))
 }
 watch(options, async (value) => {
@@ -28,7 +30,7 @@ function handleChangeStatus(state: boolean, item: Item) {
   const date = state ? dayjs().format('YYYY-MM-DD') : null
   controller.update({
     publishedAt: date
-   },
+  },
     item.id)
 }
 </script>
@@ -58,7 +60,8 @@ function handleChangeStatus(state: boolean, item: Item) {
       </template>
       <template #item-status="item">
         <div class="flex items-center space-x-2">
-          <UiSwitch @update:checked="(e:any) => handleChangeStatus(e, item)" :id="item.id" :checked="!!item.publishedAt" />
+          <UiSwitch @update:checked="(e: any) => handleChangeStatus(e, item)" :id="item.id"
+            :checked="!!item.publishedAt" />
           <UiLabel class="cursor-pointer" :for="item.id">{{ item.publishedAt ? 'Active' : 'Inactive' }}</UiLabel>
         </div>
       </template>

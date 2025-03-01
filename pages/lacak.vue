@@ -34,7 +34,7 @@ async function handleClickLacak(e: any) {
   <div class="bg-orange-primary ">
     <div class="max-w-4xl px-3 mx-auto py-12">
       <div class="mb-12">
-        <h2 class="krona-one text-lg md:text-2xl text-center mb-4 text-white">LACAK PENGIRIMAN</h2>
+        <h2 class="krona-one text-lg md:text-2xl text-center mb-4 text-white uppercase">Informasi Pesanan</h2>
         <div class="flex flex-col items-center space-y-4">
           <input v-model="kodePengiriman" @keyup="handleClickLacak"
             class="border bg-white h-10 w-full px-3 outline-none focus:bg-white/10 focus:placeholder:text-white placeholder:text-[#599AC8] text-[#599AC8]"
@@ -63,7 +63,7 @@ async function handleClickLacak(e: any) {
           </div>
         </div>
         <div class="mt-6">
-          <div>Informasi Kurir :</div>
+          <div>Informasi Pengiriman :</div>
           <div class="bg-white shadow-lg mt-3 p-2 md:p-6 rounded-xl">
             <div class="flex justify-center pb-6 border-b-2 border-[#00528C]">
               <Logo />
@@ -130,7 +130,7 @@ async function handleClickLacak(e: any) {
                   'flex-1 p-3 md:p-6 text-start'
                 ]">
                   <div>
-                    <p class="text-sm">{{ $dayjs(item.createdAt).format('DD-MM-YYYY, HH.mm') }} WIB</p>
+                    <p class="text-sm">{{ $dayjs(item.createdAt).format('DD MMMM YYYY') }}</p>
                     <div class="text-lg font-semibold">{{ item.description }}</div>
                   </div>
                 </div>
@@ -140,7 +140,7 @@ async function handleClickLacak(e: any) {
                   'flex-1 p-3 md:p-6 text-end'
                 ]">
                   <div>
-                    <p class="text-sm">{{ $dayjs(item.createdAt).format('DD-MM-YYYY, HH.mm') }} WIB</p>
+                    <p class="text-sm">{{ $dayjs(item.createdAt).format('DD MMMM YYYY') }}</p>
                     <div class="text-lg font-semibold">{{ item.description }}</div>
                   </div>
                 </div>

@@ -72,7 +72,10 @@ function handleChangeImage(e:any) {
           <img class="w-full h-full object-contain" :src="item.preview" alt="">
         </div>
       </div>
-      <div class="flex justify-start mt-3">
+      <div class="flex justify-start mt-3 gap-2">
+        <UiButton @click="router.push('/admin/delivery')" variant="outline" type="button">
+          Cancel
+        </UiButton>
         <UiButton @click="setDelivedOrder" :disabled="controller.isSubmitting">
           Submit
         </UiButton>

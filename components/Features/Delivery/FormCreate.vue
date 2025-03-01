@@ -157,7 +157,10 @@ function handleChangeDriver(e: string) {
         </UiFormField>
       </div>
     </div>
-    <div class="flex justify-end mt-3">
+    <div class="flex justify-end mt-3 gap-2">
+      <UiButton @click="router.push('/admin/delivery')" variant="outline" type="button">
+        Cancel
+      </UiButton>
       <UiButton :disabled="controller.isSubmitting" type="submit">
         Submit
       </UiButton>

@@ -5,6 +5,7 @@ import { useArmadaStore } from '@/app/stores/useArmadaStore';
 import { useDeliveryStore } from '@/app/stores/useDeliveryStore';
 import { useDriverStore } from '@/app/stores/useDriverStore';
 const route = useRoute()
+const router = useRouter()
 const driverController = useDriverStore()
 const armadaController = useArmadaStore()
 const deliveryController = useDeliveryStore()
@@ -20,6 +21,11 @@ const driverSelected = ref<TDriverItem>(driverController.lists.find(i => i.id ==
 </script>
 <template>
   <div>
+    <div class="mb-2">
+      <UiButton @click="router.push('/admin/delivery')" variant="outline" type="button">
+        <Icon name="solar:arrow-left-linear" class="mr-2" /> Back
+      </UiButton>
+    </div>
     <div class="p-3 border rounded-lg">
       <div class="text-sm uppercase font-bold mb-2">File Evidence</div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
@@ -108,9 +114,13 @@ const driverSelected = ref<TDriverItem>(driverController.lists.find(i => i.id ==
     </div>
     <div class="my-3 border rounded-xl p-5">
       <h2 class="text-xl font-semibold mb-2">Progres Pengiriman</h2>
-      <div class="flex py-3 border-b" v-for="item,index in controller.detail.progress_pengiriman" :key="item.id">
+      <div class="flex py-3 border-b" v-for="item, index in controller.detail.progress_pengiriman" :key="item.id">
         <div class="w-5">-</div>
-        <div class="text-sm font-bold">{{ item.description }} -  {{ $dayjs(item.createdAt).format('DD MMMM YYYY HH:mm:ss') }}</div>
+        <div class="text-sm font-bold">
+          {{ item.description }}
+          -
+          {{ $dayjs(item.createdAt).format('DD MMMM YYYY HH: mm:ss') }}
+        </div>
       </div>
     </div>
   </div>

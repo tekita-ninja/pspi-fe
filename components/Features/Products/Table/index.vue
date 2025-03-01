@@ -10,11 +10,13 @@ const options = ref<ServerOptions>(common.$state.params);
 function initialData() {
   common.changeParams({
     ...common.$state.params,
-    status: undefined
+    status: undefined,
+    
   });
   controller.get(toQueryParams({
     ...common.$state.params,
-    status: undefined
+    status: undefined,
+    
   }))
 }
 watch(options, async (value) => {

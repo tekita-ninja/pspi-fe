@@ -7,6 +7,7 @@ import { useArmadaStore } from '@/app/stores/useArmadaStore';
 import { useDriverStore } from '@/app/stores/useDriverStore';
 import { useUploadStore } from '@/app/stores/useUploadStore';
 import { fromArmadaSchema } from '@/app/validations/armada';
+import { optionQuantityArmada } from '@/constants/options';
 import { useForm } from 'vee-validate';
 
 const router = useRouter()
@@ -20,7 +21,7 @@ const imageLeft = ref<{ file?: File, preview: string }>()
 const controllerDriver = useDriverStore()
 const controllerUpload = useUploadStore()
 const controller = useArmadaStore()
-
+const showInputQty = ref(false)
 await controllerDriver.getAll()
 function handleChangeImageFront(e: any) {
   imageFront.value = {
@@ -103,6 +104,16 @@ const onSubmit = form.handleSubmit(async (values) => {
   router.push('/admin/armada')
 
 })
+
+function handleChangeQuantity(q: string) {
+  if (q === "other") {
+    form.setFieldValue("quantity", undefined)
+    showInputQty.value = true
+  } else {
+    showInputQty.value = false
+    form.setFieldValue("quantity",q)
+  }
+}
 </script>
 <template>
   <ContainersPage title="Armada" subtitle="Form Armada">
@@ -213,7 +224,7 @@ const onSubmit = form.handleSubmit(async (values) => {
               </UiFormField>
               <UiFormField v-slot="{ componentField }" name="defaultDriverId">
                 <UiFormItem>
-                  <UiFormLabel>Main Driver</UiFormLabel>
+                  <UiFormLabel>MAIN DRIVER</UiFormLabel>
                   <UiFormControl>
                     <UiSelect v-bind="componentField">
                       <UiSelectTrigger>
@@ -247,27 +258,42 @@ const onSubmit = form.handleSubmit(async (values) => {
               </UiFormItem>
             </UiFormField>
             <div class="grid grid-cols-2 gap-3">
-              <UiFormField v-slot="{ componentField }" name="quantity">
+              <UiFormField v-slot="{ componentField }" name="quantityOpt" @update:model-value="handleChangeQuantity">
                 <UiFormItem>
-                  <UiFormLabel>QUANTITY</UiFormLabel>
+                  <UiFormLabel>SELECT QUANTITY</UiFormLabel>
                   <UiFormControl>
-                    <UiInput type="text" placeholder="16K..." v-bind="componentField" />
+                    <UiSelect v-bind="componentField">
+                      <UiSelectTrigger>
+                        <UiSelectValue placeholder="Select Quantity" />
+                      </UiSelectTrigger>
+                      <UiSelectContent>
+                        <UiSelectGroup>
+                          <UiSelectLabel>quantity</UiSelectLabel>
+                          <UiSelectItem v-for="item in optionQuantityArmada" :key="item.label" :value="`${item.label}`">
+                            {{ item.label }}
+                          </UiSelectItem>
+                        </UiSelectGroup>
+                      </UiSelectContent>
+                    </UiSelect>
                   </UiFormControl>
                   <UiFormMessage />
                 </UiFormItem>
               </UiFormField>
-              <!-- <UiFormField v-slot="{ componentField }" name="kompartment">
+              <UiFormField v-if="showInputQty" v-slot="{ componentField }" name="quantity">
                 <UiFormItem>
-                  <UiFormLabel>KOMPARTEMENT</UiFormLabel>
+                  <UiFormLabel>INPUT QUANTITY</UiFormLabel>
                   <UiFormControl>
-                    <UiInput type="text" placeholder="4 | 4 | 8 ..." v-bind="componentField" />
+                    <UiInput type="text" placeholder="Contoh: 16 L" v-bind="componentField" />
                   </UiFormControl>
                   <UiFormMessage />
                 </UiFormItem>
-              </UiFormField> -->
+              </UiFormField>
             </div>
           </div>
           <UiDialogFooter class="mt-4 flex justify-end">
+            <UiButton @click="router.push('/admin/armada')" variant="outline" type="button">
+              Cancel
+            </UiButton>
             <UiButton type="submit">
               Save
             </UiButton>

@@ -24,5 +24,12 @@ export const useCommonStore = defineStore("useCommonStore", {
         query: { ...routes.query, ...params },
       });
     },
+    async resetParams() {
+      this.params = { page: 1, rowsPerPage: 10 };
+      navigateTo({
+        path: "",
+        query: this.params,
+      });
+    },
   },
 });
