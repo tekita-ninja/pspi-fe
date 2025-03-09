@@ -66,7 +66,7 @@ function handleChangeImage(e:any) {
     <div>
       <div class="my-4">
         <div class="text-sm mb-2">Upload Photo Evidence</div>
-        <input multiple accept="image/*" type="file" @change="handleChangeImage">
+        <input accept="image/*" type="file" @change="handleChangeImage">
       </div>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
         <div v-for="item in images" class="border p-2 aspect-video w-full">

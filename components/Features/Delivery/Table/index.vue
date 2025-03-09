@@ -36,7 +36,10 @@ watch(options, async (value) => {
       <template #item-code="item">
         <div>
           <div>{{ item?.code }}</div>
-          <div v-if="$dayjs().diff($dayjs(item.startDate), 'day') > 7" class="text-[10px] font-bold text-destructive">Expired Code</div>
+          <div v-if="$dayjs().diff($dayjs(item.createdAt), 'day') > 14" class="text-[10px] font-bold text-destructive">
+            Expired Code
+          </div>
+          <div v-else class="text-xs font-semibold">Age: {{ $dayjs().diff($dayjs(item.createdAt), 'day') }} days</div>
         </div>
       </template>
       <template #item-armada="item">
