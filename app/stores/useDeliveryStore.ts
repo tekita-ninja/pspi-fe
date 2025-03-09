@@ -54,7 +54,7 @@ export const useDeliveryStore = defineStore("useDeliveryStore", {
           this.loading = false
           return
         }
-        const isExp = dayjs().diff(dayjs(response.createdAt), 'day') >= 7
+        const isExp = dayjs().diff(dayjs(response.createdAt), 'day') > 14
         if (isExp) {
           toast.error('Ups', {
             description: 'No. Pengiriman Kadaluwarsa',

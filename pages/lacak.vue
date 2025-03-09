@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { useDeliveryStore } from '@/app/stores/useDeliveryStore';
+import ImageView from '@/components/ImageView.vue';
 
 definePageMeta({
   layout: "default",
 });
 
 useHead({
-  title: "Lacak Pengiriman",
+  title: "Innformasi Pengiriman",
   meta: [
     {
       name: "og:image",
@@ -15,7 +16,7 @@ useHead({
     {
       name: "description",
       content:
-        "Lacak Pengiriman",
+        "Innformasi Pengiriman",
     },
   ],
 });
@@ -88,33 +89,33 @@ async function handleClickLacak(e: any) {
                       <div>{{ controller.detail.armada?.nopol }} | {{ controller.detail.armada?.merk }}</div>
                       <div class="grid grid-cols-2 gap-2 my-2">
                         <div class="aspect-video border">
-                          <img v-if="controller.detail.armada.image_front" class="h-full w-full object-contain"
-                            :src="toAssetLink(controller.detail.armada.image_front)" alt="">
+                          <img v-if="controller.detail.armada?.image_front" class="h-full w-full object-contain"
+                            :src="toAssetLink(controller.detail.armada?.image_front)" alt="">
                         </div>
                         <div class="aspect-video border">
-                          <img v-if="controller.detail.armada.image_back" class="h-full w-full object-contain"
-                            :src="toAssetLink(controller.detail.armada.image_back)" alt="">
+                          <img v-if="controller.detail.armada?.image_back" class="h-full w-full object-contain"
+                            :src="toAssetLink(controller.detail.armada?.image_back)" alt="">
                         </div>
                         <div class="aspect-video border">
-                          <img v-if="controller.detail.armada.image_left" class="h-full w-full object-contain"
-                            :src="toAssetLink(controller.detail.armada.image_left)" alt="">
+                          <img v-if="controller.detail.armada?.image_left" class="h-full w-full object-contain"
+                            :src="toAssetLink(controller.detail.armada?.image_left)" alt="">
                         </div>
                         <div class="aspect-video border">
-                          <img v-if="controller.detail.armada.image_right" class="h-full w-full object-contain"
-                            :src="toAssetLink(controller.detail.armada.image_right)" alt="">
+                          <img v-if="controller.detail.armada?.image_right" class="h-full w-full object-contain"
+                            :src="toAssetLink(controller.detail.armada?.image_right)" alt="">
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="w-1/2 mx-auto mb-4 md:w-1/4 shrink-0 aspect-[3/4] border">
-                  <img class="h-full w-full object-cover" :src="toAssetLink(controller.detail.driver.image)" alt="">
+                  <img class="h-full w-full object-cover" :src="toAssetLink(controller.detail.driver?.image)" alt="">
                 </div>
               </div>
               <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF]">
                 <div class="w-44 shrink-0 font-bold">Kapasitas Manual</div>
                 <div class="w-2 hidden md:block">:</div>
-                <div class="flex-1">{{ controller.detail.armada.quantity }}</div>
+                <div class="flex-1">{{ controller.detail.armada?.quantity }}</div>
               </div>
             </div>
           </div>
@@ -150,6 +151,16 @@ async function handleClickLacak(e: any) {
             </template>
             <div class="flex justify-end mt-4">
               <img class="w-12 h-12 ml-3" src="/images/box-lacak.png" alt="box">
+            </div>
+            <div v-if="controller.detail?.bukti_pengiriman && controller.detail?.bukti_pengiriman.length > 0">
+              <div class="text-center mb-3 font-bold">
+                BUKTI PENGIRIMAN
+              </div>
+              <div class="grid grid-cols-1 gap-3">
+                <div class="w-full h-full" v-for="item in controller.detail.bukti_pengiriman">
+                  <img class="w-full h-full object-contain" :src="toAssetLink(item.image)" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
