@@ -105,6 +105,7 @@ const codriverSelected = ref<TDriverItem>(driverController.lists.find(i => i.id 
           </div>
         </div>
       </div>
+      <div class="font-semibold">Delivery Code : {{ deliveryController.detail.code }}</div>
       <div class="space-y-3">
         <UiFormField v-slot="{ componentField }" name="phone" :model-value="deliveryController.detail.phone">
           <UiFormItem>
