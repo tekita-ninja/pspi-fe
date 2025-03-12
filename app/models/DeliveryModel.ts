@@ -39,6 +39,7 @@ export type TDeliveryItem = {
   createdAt: string
   updatedAt: string
   driver: TDriverForm
+  codriver: TDriverForm
   bukti_pengiriman: TBuktiPengiriman[],
   progress_pengiriman: TProgresPemgirimanItem[] | [],
   armada: TArmadaForm

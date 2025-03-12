@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useDeliveryStore } from '@/app/stores/useDeliveryStore';
-import ImageView from '@/components/ImageView.vue';
 
 definePageMeta({
   layout: "default",
@@ -73,9 +72,14 @@ async function handleClickLacak(e: any) {
               <div class="flex flex-col md:flex-row pt-6 gap-3 items-start">
                 <div class="flex-1 space-y-6">
                   <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF]">
-                    <div class="w-44 shrink-0 font-bold">Nama</div>
+                    <div class="w-44 shrink-0 font-bold">Nama Driver</div>
                     <div class="w-2 hidden md:block">:</div>
                     <div class="flex-1">{{ controller.detail.driver?.name || '-' }}</div>
+                  </div>
+                  <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF]">
+                    <div class="w-44 shrink-0 font-bold">Nama Codriver</div>
+                    <div class="w-2 hidden md:block">:</div>
+                    <div class="flex-1">{{ controller.detail?.codriver?.name || '-' }}</div>
                   </div>
                   <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF]">
                     <div class="w-44 shrink-0 font-bold">No. Telepon</div>
@@ -116,6 +120,12 @@ async function handleClickLacak(e: any) {
                 <div class="w-44 shrink-0 font-bold">Kapasitas Manual</div>
                 <div class="w-2 hidden md:block">:</div>
                 <div class="flex-1">{{ controller.detail.armada?.quantity }}</div>
+              </div>
+              <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF] mt-3">
+                <div class="w-44 shrink-0 font-bold">Dokumen</div>
+                <div class="w-2 hidden md:block">:</div>
+                <a v-if="controller.detail?.armada.terra_doc" :href="toAssetLink(controller.detail?.armada.terra_doc)"
+                  target="_blank" rel="noopener noreferrer" class="font-bold underline"> Lihat Dokumen </a>
               </div>
             </div>
           </div>

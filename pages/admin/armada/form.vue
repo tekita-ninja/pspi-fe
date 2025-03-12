@@ -283,7 +283,7 @@ function handleChangeQuantity(q: string) {
                 <UiFormItem>
                   <UiFormLabel>INPUT QUANTITY</UiFormLabel>
                   <UiFormControl>
-                    <UiInput type="text" placeholder="Contoh: 16 L" v-bind="componentField" />
+                    <UiInput type="text" placeholder="Contoh: 16.000 L" v-bind="componentField" />
                   </UiFormControl>
                   <UiFormMessage />
                 </UiFormItem>
