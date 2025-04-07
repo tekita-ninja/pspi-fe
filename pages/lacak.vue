@@ -6,7 +6,7 @@ definePageMeta({
 });
 
 useHead({
-  title: "Innformasi Pengiriman",
+  title: "Informasi Pengiriman",
   meta: [
     {
       name: "og:image",
@@ -38,7 +38,7 @@ async function handleClickLacak(e: any) {
         <div class="flex flex-col items-center space-y-4">
           <input v-model="kodePengiriman" @keyup="handleClickLacak"
             class="border bg-white h-10 w-full px-3 outline-none focus:bg-white/10 focus:placeholder:text-white placeholder:text-[#599AC8] text-[#599AC8]"
-            type="text" placeholder="Input No. Pengiriman">
+            type="text" placeholder="Input Kode Pengiriman">
           <button :disabled="controller.loading" @click="handleLacak"
             class="bg-[#599AC8] py-2 px-5 text-white font-semibold flex items-center gap-2">
             <Icon v-if="controller.loading" name="mingcute:loading-fill" class="animate-spin" />
@@ -50,7 +50,7 @@ async function handleClickLacak(e: any) {
         class="border-8 border-[#599AC8] bg-gradient-to-b from-[#BAE3FF] to-[#FFFFFF] p-6 text-[#00528C]">
         <div class="space-y-3">
           <div class="flex flex-col md:flex-row">
-            <div class="w-44 shrink-0 font-bold">NO. PENGIRIMAN</div>
+            <div class="w-44 shrink-0 font-bold">KODE PENGIRIMAN</div>
             <div class="w-2 hidden md:block">:</div>
             <div class="flex-1">{{ controller.detail.code }}</div>
           </div>

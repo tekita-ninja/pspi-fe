@@ -77,7 +77,9 @@ export const useDeliveryStore = defineStore("useDeliveryStore", {
       try {
         this.isSubmitting = true
         const response = await Service.create(data)
-        const textWA = `No. Pengiriman: ${response.data?.data?.code} - Pesanan Anda Sudah Dibuat pada ${dayjs(data.startDate).format('DD MMMM YYYY HH:mm')} dan siap dikirimkan`
+        // const textWA = `No. Pengiriman: ${response.data?.data?.code} - Pesanan Anda Sudah Dibuat pada ${dayjs(data.startDate).format('DD MMMM YYYY HH:mm')} dan siap dikirimkan`
+        // const textWA = `Pesanan%20BBM%20anda%20sudah%20kami%20siapkan%20pada%${dayjs(data.startDate).format('DD MMMM YYYY HH:mm')}%2015%3A02%20dan%20siap%20untuk%20dikirimkan.%0A%0AKode%20Pengiriman%3A%20${response.data?.data?.code}%0A%0ASilahkan%20cek%20status%20pengiriman%20BBM%20melalui%20website%20resmi%20kami%3A%0Ahttps%3A%2F%2Fwww.primasynergy.com%2Flacak%2F%0A%0ATerima%20kasih%20sudah%20mempercayakan%20kebutuhan%20BBM%20anda%20Kepada%20kami🙏🙏🙏  %F0%9F%99%8F`
+        const textWA = `Pesanan%20BBM%20anda%20sudah%20kami%20siapkan%20pada%${dayjs(data.startDate).format('DD MMMM YYYY HH:mm')}%2015%3A02%20dan%20siap%20untuk%20dikirimkan.%0A%0AKode%20Pengiriman%3A%20${response.data?.data?.code}%0A%0ASilahkan%20cek%20status%20pengiriman%20BBM%20melalui%20website%20resmi%20kami%3A%0Ahttps%3A%2F%2Fwww.primasynergy.com%2Flacak%2F%0A%0ATerima%20kasih%20sudah%20mempercayakan%20kebutuhan%20BBM%20anda%20Kepada%20kami.`
         if (response.status === 201) {
           await this.get(toQueryParams(common.$state.params))
           toast.success('Success!', {
@@ -158,6 +160,18 @@ export const useDeliveryStore = defineStore("useDeliveryStore", {
             description: 'success delete data!'
           })
         }
+      } catch (error: any) {
+        return error.response.data
+      } finally {
+        this.loading = false
+      }
+    },
+    async downloadExcel() {
+      try {
+        this.loading = true
+        const response = await Service.downloadExcel()
+        // this.detail = response
+        return response;
       } catch (error: any) {
         return error.response.data
       } finally {

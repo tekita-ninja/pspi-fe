@@ -85,7 +85,7 @@ watch(options, async (value) => {
             <Icon class="w-4 h-4" name="fontisto:info" />
           </UiButton>
           <FeaturesDeliveryDialogStart v-if="item.statusPengiriman === 0" :item="item" />
-          <UiButton v-if="item.statusPengiriman === 0" :item="item" size="sm"
+          <UiButton v-if="item.statusPengiriman !== 3" :item="item" size="sm"
             @click="router.push(`/admin/delivery/edit/${item.id}`)" class="flex gap-1">
             <Icon class="w-4 h-4" name="material-symbols:edit" /> Edit
           </UiButton>
