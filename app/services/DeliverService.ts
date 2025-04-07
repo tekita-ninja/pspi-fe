@@ -64,6 +64,13 @@ class DeliverService {
     });
     return response;
   }
+  async downloadExcel() {
+    const response = await this.api({
+      url: `delivery/download/excel`,
+      method: "GET",
+    });
+    return response.data;
+  }
 }
 
 export default new DeliverService();
