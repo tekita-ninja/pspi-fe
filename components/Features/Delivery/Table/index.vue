@@ -42,6 +42,9 @@ watch(options, async (value) => {
           <div v-else class="text-xs font-semibold">Age: {{ $dayjs().diff($dayjs(item.createdAt), 'day') }} days</div>
         </div>
       </template>
+      <template #item-quantity="item">
+        {{ item?.quantity && item?.quantity + " (ℓ)" }}
+      </template>
       <template #item-armada="item">
         <div>
           <div class="flex">

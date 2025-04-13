@@ -36,6 +36,8 @@ export type TDeliveryItem = {
   endDate: string | null,
   phone: string
   tujuan: string
+  nama_penerima: string
+  quantity: string
   createdAt: string
   updatedAt: string
   driver: TDriverForm

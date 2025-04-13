@@ -10,6 +10,8 @@ export const fromDeliverySchema = toTypedSchema(z.object({
   startDate: z.string({ message }).optional(),
   phone: z.string({ message }),
   tujuan: z.string({ message }),
+  nama_penerima: z.string({ message }),
+  quantity: z.string({ message }),
 }))
 
 export const fromDeliveredSchema = toTypedSchema(z.object({
@@ -22,4 +24,6 @@ export const fromSearchDeliveredSchema = toTypedSchema(z.object({
   start: z.string({ message }).optional(),
   end: z.string({ message }).optional(),
   code: z.string({ message }).optional(),
+  nama_penerima: z.string({ message }).optional(),
+  quantity: z.string({ message }).optional(),
 }))

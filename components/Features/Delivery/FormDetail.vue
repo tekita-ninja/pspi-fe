@@ -58,7 +58,30 @@ const codriverSelected = ref<TDriverItem>(
                 </div>
             </div>
         </div>
-        <div class="space-y-3">
+        <div class="space-y-3 mt-4">
+            <div class="grid md:grid-cols-3">
+                <UiFormField
+                    v-slot="{ componentField }"
+                    name="quantity"
+                    :model-value="deliveryController.detail.quantity"
+                >
+                    <UiFormItem>
+                        <UiFormLabel>INPUT QUANTITY (ℓ)</UiFormLabel>
+                        <UiFormControl>
+                            <UiInput
+                                placeholder="16.000"
+                                data-maska-tokens="9:[0-9]:repeated"
+                                data-maska-reversed
+                                v-maska
+                                data-maska="9.99#.###"
+                                type="text"
+                                v-bind="componentField"
+                            />
+                        </UiFormControl>
+                        <UiFormMessage />
+                    </UiFormItem>
+                </UiFormField>
+            </div>
             <div class="grid md:grid-cols-3 gap-3">
                 <div>
                     <div class="my-3 p-3 border rounded-lg">
@@ -193,23 +216,38 @@ const codriverSelected = ref<TDriverItem>(
                 Delivery Code : {{ deliveryController.detail.code }}
             </div>
             <div class="space-y-3">
-                <UiFormField
-                    v-slot="{ componentField }"
-                    name="phone"
-                    :model-value="deliveryController.detail.phone"
-                >
-                    <UiFormItem>
-                        <UiFormLabel>Phone</UiFormLabel>
-                        <UiFormControl>
-                            <UiInput
-                                type="tel"
-                                placeholder="phone..."
-                                v-bind="componentField"
-                            />
-                        </UiFormControl>
-                        <UiFormMessage />
-                    </UiFormItem>
-                </UiFormField>
+                <div class="grid md:grid-cols-2 gap-3">
+                    <UiFormField v-slot="{ componentField }" name="phone" :model-value="deliveryController.detail.phone">
+                        <UiFormItem>
+                            <UiFormLabel>Phone</UiFormLabel>
+                            <UiFormControl>
+                                <UiInput
+                                    type="tel"
+                                    placeholder="phone..."
+                                    v-bind="componentField"
+                                />
+                            </UiFormControl>
+                            <UiFormMessage />
+                        </UiFormItem>
+                    </UiFormField>
+                    <UiFormField
+                        v-slot="{ componentField }"
+                        name="nama_penerima"
+                        :model-value="deliveryController.detail.nama_penerima"
+                    >
+                        <UiFormItem>
+                            <UiFormLabel>Name</UiFormLabel>
+                            <UiFormControl>
+                                <UiInput
+                                    type="text"
+                                    placeholder="name..."
+                                    v-bind="componentField"
+                                />
+                            </UiFormControl>
+                            <UiFormMessage />
+                        </UiFormItem>
+                    </UiFormField>
+                </div>
                 <UiFormField
                     v-slot="{ componentField }"
                     name="tujuan"
