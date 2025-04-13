@@ -28,3 +28,8 @@ export const toPriceIDR = (data:string) => {
     currency: 'IDR',
   }).format(+data)
 }
+export const toNumberIDR = (data: string) => {
+  return new Intl.NumberFormat('id-ID', {
+    currency: 'IDR',
+  }).format(+data)
+}
