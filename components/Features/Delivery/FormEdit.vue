@@ -25,6 +25,7 @@ const form = useForm({
 const onSubmit = form.handleSubmit(async (values) => {
     const newData = {
         ...values,
+        quantity: values.quantity.split(".").join(""),
         startDate: new Date(),
         statusPengiriman: 0,
     };
@@ -339,7 +340,11 @@ function onFocus(event: any) {
             </div>
             <div class="space-y-3">
                 <div class="grid md:grid-cols-2 gap-3">
-                    <UiFormField v-slot="{ componentField }" name="phone" :model-value="deliveryController.detail.phone">
+                    <UiFormField
+                        v-slot="{ componentField }"
+                        name="phone"
+                        :model-value="deliveryController.detail.phone"
+                    >
                         <UiFormItem>
                             <UiFormLabel>Phone</UiFormLabel>
                             <UiFormControl>
