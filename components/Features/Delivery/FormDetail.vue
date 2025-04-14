@@ -254,13 +254,13 @@ const codriverSelected = ref<TDriverItem>(
                     :model-value="deliveryController.detail.tujuan"
                 >
                     <UiFormItem>
-                        <UiFormLabel>DESTINATION</UiFormLabel>
+                        <UiFormLabel>Address</UiFormLabel>
                         <UiFormControl>
                             <UiTextarea
                                 disabled
                                 readonly
                                 rows="5"
-                                placeholder="Destination Address..."
+                                placeholder="Address..."
                                 v-bind="componentField"
                             />
                         </UiFormControl>

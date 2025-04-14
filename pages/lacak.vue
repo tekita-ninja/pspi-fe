@@ -119,7 +119,6 @@ async function handleClickLacak(e: any) {
               <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF]">
                 <div class="w-44 shrink-0 font-bold">Quantity</div>
                 <div class="w-2 hidden md:block">:</div>
-                <pre>{{ controller.detail?.quantity }}</pre>
                 <div class="flex-1">{{ controller.detail?.quantity ? toNumberIDR(controller.detail?.quantity) + " ℓ": '-' }}</div>
               </div>
               <div class="flex flex-col md:flex-row px-3 py-2 rounded-full bg-[#D7EFFF] mt-3">
