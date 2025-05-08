@@ -19,7 +19,7 @@ export default defineNuxtConfig({
         },
         {
           name: "og:title",
-          content: "PT Prima Synergy Petrolium Indonesia"
+          content: "PT. Prima Synergy Petroleum Indonesia"
         },
       ],
     },
