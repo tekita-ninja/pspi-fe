@@ -3,7 +3,7 @@ name: Release FE
 on:
   push:
     branches:
-      - feat/workflow
+      - feature/workflow
 
 jobs:
   deploy:
