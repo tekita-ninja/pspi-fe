@@ -86,7 +86,7 @@ export const useDeliveryStore = defineStore("useDeliveryStore", {
         Terima kasih telah mempercayakan kebutuhan BBM Anda kepada kami.
         
 Kami ingin menginformasikan bahwa pesanan BBM sedang dalam proses pengiriman.
-Kode Pengiriman: ${code}
+Kode Pengiriman: \`${code}\`
         
 Silakan cek status pengiriman Anda melalui tautan berikut: www.primasynergy.com/lacak?code=${code}
         
@@ -94,8 +94,6 @@ Jika ada pertanyaan atau membutuhkan bantuan lainnya, jangan ragu untuk menghubu
         
 Terima kasih atas kepercayaan Anda.
       `;
-
-        // URL-encode jika mau kirim via WhatsApp atau link
         const encodedMessage = encodeURIComponent(message);
         if (response.status === 201) {
           await this.get(toQueryParams(common.$state.params))
