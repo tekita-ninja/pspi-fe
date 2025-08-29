@@ -95,24 +95,13 @@ useHead({
     <div class="space-y-10">
       <div class="border-b border-[#599AC8] pb-2">
         <h3 class="koulen text-semibold text-3xl md:text-5xl text-orange-primary">
-          SIMFIT NO. 146 TAHUN 2024 SUMBAGUT
+          SIMFIT NO. 146 TAHUN 2025 SUMBAGUT
         </h3>
       </div>
       <div>
-        <img src="/images/legals/legal-09.png" alt="SIMFIT NO. 146 TAHUN 2024 SUMBAGUT"
+        <img src="/images/legals/legal-09.png" alt="SIMFIT NO. 146 TAHUN 2025 SUMBAGUT"
           class="w-full max-w-3xl mx-auto" />
       </div>
     </div>
-    <!-- <div class="space-y-10">
-      <div class="border-b border-[#599AC8] pb-2">
-        <h3 class="koulen text-semibold text-3xl md:text-5xl text-orange-primary">
-          CERTIFICATE
-        </h3>
-      </div>
-      <div>
-        <img src="/images/legals/legal-10.png" alt="SIMFIT NO. 146 TAHUN 2024 SUMBAGUT"
-          class="w-full max-w-3xl mx-auto" />
-      </div>
-    </div> -->
   </section>
 </template>
