@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useLegalDocumentStore } from '@/app/stores/useLegalDocumentStore';
+
 definePageMeta({
   layout: 'overlay',
 })
@@ -19,6 +21,12 @@ useHead({
     },
   ]
 });
+const controller = useLegalDocumentStore()
+await controller.getAll()
+
+console.log({
+  data: controller.all
+})
 </script>
 <template>
   <div class="h-[120px] bg-[#025692]"></div>
@@ -30,17 +38,17 @@ useHead({
   </div>
   <!-- LEGALITAS -->
   <section class="px-5 md:px-20 py-10 md:py-24 bg-white space-y-10">
-    <div class="space-y-10">
+    <div class="space-y-10" v-for="item in controller.all" :key="item.id">
       <div class="border-b border-[#599AC8] pb-2">
         <h3 class="koulen text-semibold text-3xl md:text-5xl text-orange-primary">
-          NPWP
+          {{item.title}}
         </h3>
       </div>
       <div>
-        <img src="/images/legals/legal-02.png" alt="NPWP" class="w-full max-w-3xl mx-auto" />
+        <img :src="toAssetLink(item.file)" alt="NPWP" class="w-full max-w-3xl mx-auto" />
       </div>
     </div>
-    <div class="space-y-10">
+    <!-- <div class="space-y-10">
       <div class="border-b border-[#599AC8] pb-2">
         <h3 class="koulen text-semibold text-3xl md:text-5xl text-orange-primary">
           SIUP (OSS)
@@ -102,6 +110,7 @@ useHead({
         <img src="/images/legals/legal-09.png" alt="SIMFIT NO. 146 TAHUN 2025 SUMBAGUT"
           class="w-full max-w-3xl mx-auto" />
       </div>
-    </div>
+    </div> -->
+
   </section>
 </template>

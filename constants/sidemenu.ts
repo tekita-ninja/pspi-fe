@@ -104,6 +104,13 @@ export const menusx: TMenu[] = [
         icon: 'material-symbols:delivery-truck-speed-rounded',
         level: 1,
       },
+      {
+        roles: ["SUPER"],
+        label: "Legal Doc",
+        path: "/admin/legal-document",
+        icon: 'solar:document-broken',
+        level: 1,
+      }
     ]
   },
   {
